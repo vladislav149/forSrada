@@ -26,18 +26,22 @@ const error = reactive({
 })
 
 async function auth() {
-  error.hasError = false
-  isLoading.value = true
-  const response = await userStore.login(user)
-  if (response === true) {
-    return router.push({name: 'orders'})
-  } else {
-    error.hasError = true
-    error.textError = response
+  try {
+    error.hasError = false
+    isLoading.value = true
+    const response = await userStore.login(user)
+    if (response === true) {
+      return router.push({name: 'orders'})
+    } else {
+      error.hasError = true
+      error.textError = response
+    }
+    isLoading.value = false
+    user.login = ''
+    user.password = ''
+  } catch (error) {
+    alert(error)
   }
-  isLoading.value = false
-  user.login = ''
-  user.password = ''
 }
 </script>
 
