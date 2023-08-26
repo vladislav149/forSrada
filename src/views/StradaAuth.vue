@@ -36,11 +36,12 @@ async function auth() {
       error.hasError = true
       error.textError = response
     }
+  } catch (error) {
+    alert(error)
+  } finally {
     isLoading.value = false
     user.login = ''
     user.password = ''
-  } catch (error) {
-    alert(error)
   }
 }
 </script>
